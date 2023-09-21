@@ -1,0 +1,7 @@
+.vscode/
+.DS_Store
+deployments/
+**/settings/Mainnet.toml
+**/settings/Testnet.toml
+.cache/**
+history.txt

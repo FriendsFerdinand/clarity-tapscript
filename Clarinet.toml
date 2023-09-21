@@ -1,0 +1,39 @@
+[project]
+name = 'clarity-tapscript'
+description = ''
+authors = []
+telemetry = true
+cache_dir = './.cache'
+requirements = []
+[contracts.ecc-lib]
+path = 'contracts/ecc-lib.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.uint256-ecc-lib]
+path = 'contracts/uint256-ecc-lib.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.uint256-ecc-lib-callable]
+path = 'contracts/uint256-ecc-lib-callable.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.uint256-lib]
+path = 'contracts/uint256-lib.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.uint256-private-lib]
+path = 'contracts/uint256-private-lib.clar'
+clarity_version = 2
+epoch = 2.4
+[repl.analysis]
+passes = []
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
