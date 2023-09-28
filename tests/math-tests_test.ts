@@ -79,13 +79,6 @@ Clarinet.test({
           wallet_1.address
         );
 
-        // result = chain.callReadOnlyFn(
-        //   'point',
-        //   'test-me',
-        //   [],
-        //   wallet_1.address
-        // );
-
         // assertEquals(result.result, "(ok {i0: u4171892913627134758, i1: u5437512212843661688, i2: u4757116315435683333, i3: u13455795991904716124, i4: u4221096490488203606, i5: u736585429500254868, i6: u5102038406068984499, i7: u12220388447133411904})");
           
         result = chain.callReadOnlyFn(
@@ -169,8 +162,16 @@ Clarinet.test({
 
         console.log(result.result.expectOk());
 
+
+        result = chain.callReadOnlyFn(
+          'point',
+          'test-me',
+          [],
+          wallet_1.address
+        );
+
+        console.log(result.result);
         // console.log(BigInt("115792089237316195423570985008687907853269984665640564039457584007908834671663").toString(16).toUpperCase());
-        // console.log(result.result);
 
     },
 });
