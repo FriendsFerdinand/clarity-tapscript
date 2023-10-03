@@ -116,8 +116,6 @@ Clarinet.test({
           wallet_1.address
         );
 
-        console.log(result.result);
-
 
         result = chain.callReadOnlyFn(
           'uint256-lib',
@@ -160,7 +158,7 @@ Clarinet.test({
 
         // assertEquals(result.result, "(ok {i0: u5, i1: u7343362234578611740, i2: u10822994926559106398, i3: u7674250338629420387})");
 
-        console.log(result.result.expectOk());
+        // console.log(result.result.expectOk());
 
 
         result = chain.callReadOnlyFn(
