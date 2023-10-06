@@ -1,13 +1,19 @@
 (define-constant iter-buff-32 (keccak256 0))
 (define-constant iter-buff-64 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)
 (define-constant iter-buff-256 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)
+(define-constant iter-buff-512 0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)
 (define-constant iter-buff-768 0x000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)
 ;; (define-constant iter-buff-768 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)
 (define-constant iter-buff-test 0x00)
 (define-constant uint64-max u18446744073709551615)
 (define-constant uint64-max-limit u18446744073709551616)
+
 (define-constant uint256-zero (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u0)))
 (define-constant uint256-one (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u1)))
+
+(define-constant uint512-zero (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u0) (i4 u0) (i5 u0) (i6 u0) (i7 u0)))
+(define-constant uint512-one (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u0) (i4 u0) (i5 u0) (i6 u0) (i7 u1)))
+
 (define-constant uint768-one  (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u0) (i4 u0) (i5 u0) (i6 u0) (i7 u0) (i8 u0) (i9 u0) (i10 u0) (i11 u1)))
 (define-constant uint768-zero (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u0) (i4 u0) (i5 u0) (i6 u0) (i7 u0) (i8 u0) (i9 u0) (i10 u0) (i11 u0)))
 (define-data-var tmp-uint256 (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)) uint256-zero)
@@ -100,7 +106,7 @@
 (define-read-only (remainder-uint64 (a uint))
   (if (> (/ a uint64-max-limit) u0) (mod a uint64-max-limit) a))
 
-(define-public (uint256-add (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+(define-read-only (uint256-add (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))) 
     (let ((i3 (+ (get i3 a) (get i3 b))))
     (let ((i2 (+ (get i2 a) (get i2 b) (carry i3)) ))
@@ -111,6 +117,27 @@
           (i2 (remainder-uint64 i2)) 
           (i3 (remainder-uint64 i3))
         )))))))
+
+
+(define-read-only (uint512-add (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                               (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+    (let ((i7 (+ (get i7 a) (get i7 b))))
+    (let ((i6 (+ (get i6 a) (get i6 b) (carry i7)) ))
+    (let ((i5 (+ (get i5 a) (get i5 b) (carry i6)) ))
+    (let ((i4 (+ (get i4 a) (get i4 b) (carry i5)) ))
+    (let ((i3 (+ (get i3 a) (get i3 b) (carry i4)) ))
+    (let ((i2 (+ (get i2 a) (get i2 b) (carry i3)) ))
+    (let ((i1 (+ (get i1 a) (get i1 b) (carry i2)) ))
+    (let ((i0 (+ (get i0 a) (get i0 b) (carry i1)) ))
+    (ok (tuple (i0 i0)
+          (i1 (remainder-uint64 i1))
+          (i2 (remainder-uint64 i2))
+          (i3 (remainder-uint64 i3))
+          (i4 (remainder-uint64 i4))
+          (i5 (remainder-uint64 i5))
+          (i6 (remainder-uint64 i6))
+          (i7 (remainder-uint64 i7))
+        )))))))))))
 
 (define-read-only (uint768-add (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))))
@@ -141,7 +168,7 @@
         ))))))))))))))
 )
 
-(define-public (uint256-cmp (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+(define-read-only (uint256-cmp (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (ok (if (is-eq (get i0 a) (get i0 b))
         (if (is-eq (get i1 a) (get i1 b))
@@ -153,7 +180,27 @@
             (if (> (get i1 a) (get i1 b)) 1 -1))
         (if (> (get i0 a) (get i0 b)) 1 -1))))
 
-(define-public (uint768-cmp (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
+(define-read-only (uint512-cmp (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                               (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+    (ok (if (is-eq (get i0 a) (get i0 b))
+        (if (is-eq (get i1 a) (get i1 b))
+            (if (is-eq (get i2 a) (get i2 b))
+                (if (is-eq (get i3 a) (get i3 b))
+                    (if (is-eq (get i4 a) (get i4 b))
+                        (if (is-eq (get i5 a) (get i5 b))
+                            (if (is-eq (get i6 a) (get i6 b))
+                                (if (is-eq (get i7 a) (get i7 b))
+                                0
+                                (if (> (get i7 a) (get i7 b)) 1 -1))
+                            (if (> (get i6 a) (get i6 b)) 1 -1))
+                        (if (> (get i5 a) (get i5 b)) 1 -1))
+                      (if (> (get i4 a) (get i4 b)) 1 -1))
+                    (if (> (get i3 a) (get i3 b)) 1 -1))
+                (if (> (get i2 a) (get i2 b)) 1 -1))
+            (if (> (get i1 a) (get i1 b)) 1 -1))
+        (if (> (get i0 a) (get i0 b)) 1 -1))))
+
+(define-read-only (uint768-cmp (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))))
     (ok (if (is-eq (get i0 a) (get i0 b))
           (if (is-eq (get i1 a) (get i1 b))
@@ -195,11 +242,26 @@
     )
 )
 
-(define-public (uint256-add-short (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+(define-read-only (uint256-add-short (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
                             (b uint))
     (uint256-add a (tuple (i0 u0) (i1 u0) (i2 (/ b uint64-max-limit)) (i3 (mod b uint64-max-limit)))))
 
-(define-public (uint768-add-short (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
+
+(define-read-only (uint512-add-short (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                            (b uint))
+    (uint512-add
+      a
+      (tuple
+        (i0 u0)
+        (i1 u0)
+        (i2 u0)
+        (i3 u0)
+        (i4 u0)
+        (i5 u0)
+        (i6 (/ b uint64-max-limit))
+        (i7 (mod b uint64-max-limit)))))
+
+(define-read-only (uint768-add-short (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
                             (b uint))
     (uint768-add
       a
@@ -221,34 +283,46 @@
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (ok (is-eq (unwrap-panic (uint256-cmp a b)) 0)))
 
+(define-read-only (uint256> (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+    (ok (> (unwrap-panic (uint256-cmp a b)) 0)))
+
+(define-read-only (uint256< (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+    (ok (< (unwrap-panic (uint256-cmp a b)) 0)))
+
+(define-read-only (uint512-is-eq (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                                 (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+    (ok (is-eq (unwrap-panic (uint512-cmp a b)) 0)))
+
+(define-read-only (uint512> (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                                 (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+    (ok (> (unwrap-panic (uint512-cmp a b)) 0)))
+
+(define-read-only (uint512< (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                                 (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+    (ok (< (unwrap-panic (uint512-cmp a b)) 0)))
+
 (define-read-only (uint768-is-eq (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))))
     (ok (is-eq (unwrap-panic (uint768-cmp a b)) 0)))
 
-(define-public (uint256> (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-    (ok (> (unwrap-panic (uint256-cmp a b)) 0)))
-
-(define-public (uint768> (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
+(define-read-only (uint768> (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))))
     (ok (> (unwrap-panic (uint768-cmp a b)) 0)))
 
-(define-public (uint256< (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-    (ok (< (unwrap-panic (uint256-cmp a b)) 0)))
-
-(define-public (uint768< (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
+(define-read-only (uint768< (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))))
     (ok (< (unwrap-panic (uint768-cmp a b)) 0)))
 
-(define-public (uint768<uint256 (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
+(define-read-only (uint768<uint256 (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (ok (< (unwrap-panic (uint768-cmp
       a
       (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u0) (i4 u0) (i5 u0) (i6 u0) (i7 u0) (i8 (get i0 b)) (i9 (get i1 b)) (i10 (get i2 b)) (i11 (get i3 b)))
     )) 0)))
 
-(define-public (uint256-is-zero (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+(define-read-only (uint256-is-zero (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (ok (if (is-eq (get i0 a) u0)
         (if (is-eq (get i1 a) u0)
             (if (is-eq (get i2 a) u0)
@@ -259,7 +333,22 @@
             false)
         false)))
 
-(define-public (uint768-is-zero (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))))
+(define-read-only (uint512-is-zero (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+  (ok 
+    (and
+      (is-eq (get i0 a) u0)
+      (is-eq (get i1 a) u0)
+      (is-eq (get i2 a) u0)
+      (is-eq (get i3 a) u0)
+      (is-eq (get i4 a) u0)
+      (is-eq (get i5 a) u0)
+      (is-eq (get i6 a) u0)
+      (is-eq (get i7 a) u0)
+    )
+  )
+)
+
+(define-read-only (uint768-is-zero (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))))
   (ok 
     (and
       (is-eq (get i0 a) u0)
@@ -287,7 +376,7 @@
 (define-private (loop-bits (num uint)) 
     (ok (get res (fold loop-bits-iter iter-buff-64 (tuple (num num) (res u0))))))
 
-(define-public (uint256-bits (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+(define-read-only (uint256-bits (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (ok (if (is-eq (get i0 a) u0) 
         (if (is-eq (get i1 a) u0) 
             (if (is-eq (get i2 a) u0) 
@@ -296,7 +385,7 @@
             (+ (unwrap-panic (loop-bits (get i1 a))) u128)) 
         (+ (unwrap-panic (loop-bits (get i0 a))) u192))))
 
-(define-public (uint256-bits-64 (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+(define-read-only (uint256-bits-64 (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (ok (if (is-eq (get i0 a) u0) 
         (if (is-eq (get i1 a) u0) 
             (if (is-eq (get i2 a) u0) 
@@ -307,10 +396,10 @@
             u3) 
         u4)))
 
-(define-public (uint256-rshift-64-overflow (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+(define-read-only (uint256-rshift-64-overflow (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (ok (tuple (i0 (get i1 a)) (i1 (get i2 a)) (i2 (get i3 a)) (i3 u0))))
 
-(define-public (uint256-rshift-overflow (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+(define-read-only (uint256-rshift-overflow (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
                                (b uint))
     (if (< b u128)
         (begin
@@ -336,8 +425,80 @@
             (ok uint256-zero))
         ))
 
+(define-read-only (uint512-rshift-overflow (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                               (b uint))
+    (if (< b u128)
+        (begin
+            (let ((i7 (bit-shift-left (get i7 a) b)))
+            (let ((i6 (+ (bit-shift-left (get i6 a) b) (carry i7) )))
+            (let ((i5 (+ (bit-shift-left (get i5 a) b) (carry i6) )))
+            (let ((i4 (+ (bit-shift-left (get i4 a) b) (carry i5) )))
+            (let ((i3 (+ (bit-shift-left (get i3 a) b) (carry i4) )))
+            (let ((i2 (+ (bit-shift-left (get i2 a) b) (carry i3) )))
+            (let ((i1 (+ (bit-shift-left (get i1 a) b) (carry i2) )))
+            (let ((i0 (+ (bit-shift-left (get i0 a) b) (carry i1) )))
+            (ok (tuple
+                (i0 i0)
+                (i1 (remainder-uint64 i1))
+                (i2 (remainder-uint64 i2))
+                (i3 (remainder-uint64 i3))
+                (i4 (remainder-uint64 i4))
+                (i5 (remainder-uint64 i5))
+                (i6 (remainder-uint64 i6))
+                (i7 (remainder-uint64 i7))
+                )))))))))))
+        (if (< b u256)
+            (let ((r  (- b u128)))
+                    (let ((i5 (bit-shift-left (get i7 a) r)))
+                    (let ((i4 (+ (bit-shift-left (get i6 a) r) (carry i5))))
+                    (let ((i3 (+ (bit-shift-left (get i5 a) r) (carry i4))))
+                    (let ((i2 (+ (bit-shift-left (get i4 a) r) (carry i3))))
+                    (let ((i1 (+ (bit-shift-left (get i3 a) r) (carry i2))))
+                    (let ((i0 (+ (bit-shift-left (get i2 a) r) (carry i1))))
+                    (ok (tuple
+                        (i0 (remainder-uint64 i0))
+                        (i1 (remainder-uint64 i1))
+                        (i2 (remainder-uint64 i2))
+                        (i3 (remainder-uint64 i3))
+                        (i4 (remainder-uint64 i4))
+                        (i5 (remainder-uint64 i5))
+                        (i6 u0)
+                        (i7 u0))))))))))
+            (if (< b u384)
+              (let ((r  (- b u256)))
+                    (let ((i3 (bit-shift-left (get i7 a) r)))
+                    (let ((i2 (+ (bit-shift-left (get i6 a) r) (carry i3))))
+                    (let ((i1 (+ (bit-shift-left (get i5 a) r) (carry i2))))
+                    (let ((i0 (+ (bit-shift-left (get i4 a) r) (carry i1))))
+                    (ok (tuple
+                        (i0 (remainder-uint64 i0))
+                        (i1 (remainder-uint64 i1))
+                        (i2 (remainder-uint64 i2))
+                        (i3 (remainder-uint64 i3))
+                        (i4 u0)
+                        (i5 u0)
+                        (i6 u0)
+                        (i7 u0))))))))
+              (if (< b u512)
+                (let ((r  (- b u384)))
+                    (let ((i1 (bit-shift-left (get i7 a) r)))
+                    (let ((i0 (+ (bit-shift-left (get i6 a) r) (carry i1))))
+                    (ok (tuple
+                        (i0 (remainder-uint64 i0))
+                        (i1 (remainder-uint64 i1))
+                        (i2 u0)
+                        (i3 u0)
+                        (i4 u0)
+                        (i5 u0)
+                        (i6 u0)
+                        (i7 u0))))))
+                (ok uint512-zero)
+              )
+            )
+        )
+        ))
 
-(define-public (uint768-rshift-overflow (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
+(define-read-only (uint768-rshift-overflow (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
                                (b uint))
     (if (< b u128)
         (let ((i11 (bit-shift-left (get i11 a) b)))
@@ -354,7 +515,6 @@
         (let ((i0 (+ (bit-shift-left (get i0 a) b) (carry i1) )))
           (ok (tuple
               (i0 i0)
-              ;; (i0 (remainder-uint64 i0))
               (i1 (remainder-uint64 i1))
               (i2 (remainder-uint64 i2))
               (i3 (remainder-uint64 i3))
@@ -488,7 +648,7 @@
               (ok uint768-zero)))))))
 )
 
-(define-public (uint256-lshift-1 (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+(define-read-only (uint256-lshift-1 (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (let ((r u2))
         (let ((i0 (get i0 a)))
             (let ((i1 (+ (* (mod i0 r) uint64-max-limit) (get i1 a))))
@@ -500,7 +660,7 @@
                 (i2 (/ i2 r)) 
                 (i3 (/ i3 r))))))))))
 
-(define-public (uint256-check-bit (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (b uint))
+(define-read-only (uint256-check-bit (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (b uint))
   (if (> b u256) (err 1)
     (let ((v (if (is-eq (/ b u64) u3)
             (get i0 a)
@@ -512,8 +672,31 @@
       (ok (bit-and (bit-shift-right v (mod b u64)) u1))
   )))
 
+(define-read-only (uint512-check-bit (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))) (b uint))
+  (if (> b u512) (err 1)
+    (let ((v
+          (if (is-eq (/ b u64) u7)
+            (get i0 a)
+            (if (is-eq (/ b u64) u6)
+              (get i1 a)
+              (if (is-eq (/ b u64) u5)
+                (get i2 a)
+                (if (is-eq (/ b u64) u4)
+                  (get i3 a)
+                  (if (is-eq (/ b u64) u3)
+                    (get i4 a)
+                    (if (is-eq (/ b u64) u2)
+                      (get i5 a)
+                      (if (is-eq (/ b u64) u1)
+                        (get i6 a)
+                        (get i7 a))))))))))
+      (ok (bit-and (bit-shift-right v (mod b u64)) u1))
+    )
+  )
+)
 
-(define-public (uint768-check-bit (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))) (b uint))
+
+(define-read-only (uint768-check-bit (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))) (b uint))
   (if (> b u768) (err 1)
     (let ((v (if (is-eq (/ b u64) u11)
               (get i0 a)
@@ -552,21 +735,44 @@
   (ok (bit-and (bit-shift-right v (mod b u64)) u1))
 )
 
-(define-public (uint256-sub (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+(define-read-only (uint256-sub (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (let ((i (if (unwrap-panic (uint256> a b)) a b)) (j (if (unwrap-panic (uint256> a b)) b a )))
         (let ((i3 (- (to-int (get i3 i)) (to-int (get i3 j)))))
             (let ((i2 (- (- (to-int (get i2 i)) (to-int (get i2 j))) (if (< i3 0) 1 0))))
             (let ((i1 (- (- (to-int (get i1 i)) (to-int (get i1 j))) (if (< i2 0) 1 0))))
             (let ((i0 (- (- (to-int (get i0 i)) (to-int (get i0 j))) (if (< i1 0) 1 0))))
-            (ok (tuple (i0 (to-uint i0)) 
+            (ok (tuple
+                (i0 (to-uint i0)) 
                 (i1 (mod (to-uint (if (< i1 0) (+ (to-int uint64-max-limit) i1) i1)) uint64-max-limit)) 
                 (i2 (mod (to-uint (if (< i2 0) (+ (to-int uint64-max-limit) i2) i2)) uint64-max-limit)) 
                 (i3 (mod (to-uint (if (< i3 0) (+ (to-int uint64-max-limit) i3) i3)) uint64-max-limit))))))))
         ))
 
+(define-read-only (uint512-sub (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                               (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+    (let ((i (if (unwrap-panic (uint512> a b)) a b)) (j (if (unwrap-panic (uint512> a b)) b a )))
+        (let ((i7 (- (to-int (get i7 i)) (to-int (get i7 j)))))
+            (let ((i6 (- (- (to-int (get i6 i)) (to-int (get i6 j))) (if (< i7 0) 1 0))))
+            (let ((i5 (- (- (to-int (get i5 i)) (to-int (get i5 j))) (if (< i6 0) 1 0))))
+            (let ((i4 (- (- (to-int (get i4 i)) (to-int (get i4 j))) (if (< i5 0) 1 0))))
+            (let ((i3 (- (- (to-int (get i3 i)) (to-int (get i3 j))) (if (< i4 0) 1 0))))
+            (let ((i2 (- (- (to-int (get i2 i)) (to-int (get i2 j))) (if (< i3 0) 1 0))))
+            (let ((i1 (- (- (to-int (get i1 i)) (to-int (get i1 j))) (if (< i2 0) 1 0))))
+            (let ((i0 (- (- (to-int (get i0 i)) (to-int (get i0 j))) (if (< i1 0) 1 0))))
+            (ok (tuple (i0 (to-uint i0))
+                (i1 (mod (to-uint (if (< i1 0) (+ (to-int uint64-max-limit) i1) i1)) uint64-max-limit)) 
+                (i2 (mod (to-uint (if (< i2 0) (+ (to-int uint64-max-limit) i2) i2)) uint64-max-limit)) 
+                (i3 (mod (to-uint (if (< i3 0) (+ (to-int uint64-max-limit) i3) i3)) uint64-max-limit)) 
+                (i4 (mod (to-uint (if (< i4 0) (+ (to-int uint64-max-limit) i4) i4)) uint64-max-limit)) 
+                (i5 (mod (to-uint (if (< i5 0) (+ (to-int uint64-max-limit) i5) i5)) uint64-max-limit)) 
+                (i6 (mod (to-uint (if (< i6 0) (+ (to-int uint64-max-limit) i6) i6)) uint64-max-limit)) 
+                (i7 (mod (to-uint (if (< i7 0) (+ (to-int uint64-max-limit) i7) i7)) uint64-max-limit)))
+            )))))))))
+        ))
 
-(define-public (uint768-sub (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
+
+(define-read-only (uint768-sub (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
                              (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))))
     (let (
         (i (if (unwrap-panic (uint768> a b)) a b))
@@ -598,7 +804,7 @@
               )))))))))))))))
 )
 
-(define-public (uint256-mul-short (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+(define-read-only (uint256-mul-short (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
                             (b uint))
     (let ((i3 (* (get i3 a) b)))
         (let ((i2 (+  (* (get i2 a) b)
@@ -680,13 +886,17 @@
                     (get remainder i2-2)
                   )))
         (let (
+              (i1-1 { remainder: (remainder-uint64 (* (get i0 a) (get i0 b))), carry: (carry (* (get i0 a) (get i0 b))) })
               (i1 (+
                     (carry i2)
                     (get carry i2-1)
                     (get carry i2-2)
-                    (* (get i0 a) (get i0 b))
+                    (get remainder i1-1)
                   )))
-        (let ((i0 (carry i1)))
+        (let ((i0 (+
+                    (carry i1) 
+                    (get carry i1-1)
+                  )))
         (ok (tuple
             (i0 i0)
             (i1 (remainder-uint64 i1))
@@ -702,71 +912,142 @@
         (let ((i11
                   (* (get i7 a) (get i3 b))
                 ))
-        (let ((i10 (+
+        (let (
+              (i10-1 { remainder: (remainder-uint64 (* (get i7 a) (get i2 b))), carry: (carry (* (get i7 a) (get i2 b))) })
+              (i10-2 { remainder: (remainder-uint64 (* (get i6 a) (get i3 b))), carry: (carry (* (get i6 a) (get i3 b))) })
+              (i10 (+
                     (carry i11)
-                    (* (get i7 a) (get i2 b))
-                    (* (get i6 a) (get i3 b))
+                    (get remainder i10-1)
+                    (get remainder i10-2)
                   )))
-        (let ((i9 (+
+        (let (
+              (i9-1 { remainder: (remainder-uint64 (* (get i7 a) (get i1 b))), carry: (carry (* (get i7 a) (get i1 b))) })
+              (i9-2 { remainder: (remainder-uint64 (* (get i6 a) (get i2 b))), carry: (carry (* (get i6 a) (get i2 b))) })
+              (i9-3 { remainder: (remainder-uint64 (* (get i5 a) (get i3 b))), carry: (carry (* (get i5 a) (get i3 b))) })
+              (i9 (+
                     (carry i10)
-                    (* (get i7 a) (get i1 b)) 
-                    (* (get i6 a) (get i2 b))
-                    (* (get i5 a) (get i3 b))
+                    (get carry i10-1)
+                    (get carry i10-2)
+                    (get remainder i9-1)
+                    (get remainder i9-2)
+                    (get remainder i9-3)
                   )))
-        (let ((i8-1 { remainder: (remainder-uint64 (* (get i7 a) (get i0 b))), carry: (carry (* (get i7 a) (get i0 b))) })
-
-          (i8 (+
+        (let (
+              (i8-1 { remainder: (remainder-uint64 (* (get i7 a) (get i0 b))), carry: (carry (* (get i7 a) (get i0 b))) })
+              (i8-2 { remainder: (remainder-uint64 (* (get i6 a) (get i1 b))), carry: (carry (* (get i6 a) (get i1 b))) })
+              (i8-3 { remainder: (remainder-uint64 (* (get i5 a) (get i2 b))), carry: (carry (* (get i5 a) (get i2 b))) })
+              (i8-4 { remainder: (remainder-uint64 (* (get i4 a) (get i3 b))), carry: (carry (* (get i4 a) (get i3 b))) })
+              (i8 (+
                     (carry i9)
-                    (* (get i7 a) (get i0 b))
-                    (* (get i6 a) (get i1 b))
-                    (* (get i5 a) (get i2 b))
-                    (* (get i4 a) (get i3 b))
+                    (get carry i9-1)
+                    (get carry i9-2)
+                    (get carry i9-3)
+                    (get remainder i8-1)
+                    (get remainder i8-2)
+                    (get remainder i8-3)
+                    (get remainder i8-4)
                   ))
           )
-        (let ((i7 (+
+        (let (
+              (i7-1 { remainder: (remainder-uint64 (* (get i6 a) (get i0 b))), carry: (carry (* (get i6 a) (get i0 b))) })
+              (i7-2 { remainder: (remainder-uint64 (* (get i5 a) (get i1 b))), carry: (carry (* (get i5 a) (get i1 b))) })
+              (i7-3 { remainder: (remainder-uint64 (* (get i4 a) (get i2 b))), carry: (carry (* (get i4 a) (get i2 b))) })
+              (i7-4 { remainder: (remainder-uint64 (* (get i3 a) (get i3 b))), carry: (carry (* (get i3 a) (get i3 b))) })
+              (i7 (+
                     (carry i8)
-                    (* (get i6 a) (get i0 b))
-                    (* (get i5 a) (get i1 b))
-                    (* (get i4 a) (get i2 b))
-                    (* (get i3 a) (get i3 b))
+                    (get carry i8-1)
+                    (get carry i8-2)
+                    (get carry i8-3)
+                    (get carry i8-4)
+                    (get remainder i7-1)
+                    (get remainder i7-2)
+                    (get remainder i7-3)
+                    (get remainder i7-4)
                   )))
-        (let ((i6 (+
+        (let (
+              (i6-1 { remainder: (remainder-uint64 (* (get i5 a) (get i0 b))), carry: (carry (* (get i5 a) (get i0 b))) })
+              (i6-2 { remainder: (remainder-uint64 (* (get i4 a) (get i1 b))), carry: (carry (* (get i4 a) (get i1 b))) })
+              (i6-3 { remainder: (remainder-uint64 (* (get i3 a) (get i2 b))), carry: (carry (* (get i3 a) (get i2 b))) })
+              (i6-4 { remainder: (remainder-uint64 (* (get i2 a) (get i3 b))), carry: (carry (* (get i2 a) (get i3 b))) })
+              (i6 (+
                     (carry i7)
-                    (* (get i5 a) (get i0 b))
-                    (* (get i4 a) (get i1 b))
-                    (* (get i3 a) (get i2 b))
-                    (* (get i2 a) (get i3 b))
+                    (get carry i7-1)
+                    (get carry i7-2)
+                    (get carry i7-3)
+                    (get carry i7-4)
+                    (get remainder i6-1)
+                    (get remainder i6-2)
+                    (get remainder i6-3)
+                    (get remainder i6-4)
                   )))
-        (let ((i5 (+
+        (let (
+              (i5-1 { remainder: (remainder-uint64 (* (get i4 a) (get i0 b))), carry: (carry (* (get i4 a) (get i0 b))) })
+              (i5-2 { remainder: (remainder-uint64 (* (get i3 a) (get i1 b))), carry: (carry (* (get i3 a) (get i1 b))) })
+              (i5-3 { remainder: (remainder-uint64 (* (get i2 a) (get i2 b))), carry: (carry (* (get i2 a) (get i2 b))) })
+              (i5-4 { remainder: (remainder-uint64 (* (get i1 a) (get i3 b))), carry: (carry (* (get i1 a) (get i3 b))) })
+              (i5 (+
                     (carry i6)
-                    (* (get i4 a) (get i0 b))
-                    (* (get i3 a) (get i1 b))
-                    (* (get i2 a) (get i2 b))
-                    (* (get i1 a) (get i3 b))
+                    (get carry i6-1)
+                    (get carry i6-2)
+                    (get carry i6-3)
+                    (get carry i6-4)
+                    (get remainder i5-1)
+                    (get remainder i5-2)
+                    (get remainder i5-3)
+                    (get remainder i5-4)
                   )))
-        (let ((i4 (+
+        (let (
+              (i4-1 { remainder: (remainder-uint64 (* (get i3 a) (get i0 b))), carry: (carry (* (get i3 a) (get i0 b))) })
+              (i4-2 { remainder: (remainder-uint64 (* (get i2 a) (get i1 b))), carry: (carry (* (get i2 a) (get i1 b))) })
+              (i4-3 { remainder: (remainder-uint64 (* (get i1 a) (get i2 b))), carry: (carry (* (get i1 a) (get i2 b))) })
+              (i4-4 { remainder: (remainder-uint64 (* (get i0 a) (get i3 b))), carry: (carry (* (get i0 a) (get i3 b))) })
+              (i4 (+
                     (carry i5)
-                    (* (get i3 a) (get i0 b))
-                    (* (get i2 a) (get i1 b))
-                    (* (get i1 a) (get i2 b))
-                    (* (get i0 a) (get i3 b))
+                    (get carry i5-1)
+                    (get carry i5-2)
+                    (get carry i5-3)
+                    (get carry i5-4)
+                    (get remainder i4-1)
+                    (get remainder i4-2)
+                    (get remainder i4-3)
+                    (get remainder i4-4)
                   )))
-        (let ((i3 (+
+        (let (
+              (i3-1 { remainder: (remainder-uint64 (* (get i2 a) (get i0 b))), carry: (carry (* (get i2 a) (get i0 b))) })
+              (i3-2 { remainder: (remainder-uint64 (* (get i1 a) (get i1 b))), carry: (carry (* (get i1 a) (get i1 b))) })
+              (i3-3 { remainder: (remainder-uint64 (* (get i0 a) (get i2 b))), carry: (carry (* (get i0 a) (get i2 b))) })
+              (i3 (+
                     (carry i4)
-                    (* (get i2 a) (get i0 b))
-                    (* (get i1 a) (get i1 b))
-                    (* (get i0 a) (get i2 b))
+                    (get carry i4-1)
+                    (get carry i4-2)
+                    (get carry i4-3)
+                    (get carry i4-4)
+                    (get remainder i3-1)
+                    (get remainder i3-2)
+                    (get remainder i3-3)
                   )))
-        (let ((i2 (+
+        (let (
+              (i2-1 { remainder: (remainder-uint64 (* (get i1 a) (get i0 b))), carry: (carry (* (get i1 a) (get i0 b))) })
+              (i2-2 { remainder: (remainder-uint64 (* (get i0 a) (get i1 b))), carry: (carry (* (get i0 a) (get i1 b))) })
+              (i2 (+
                     (carry i3)
-                    (* (get i1 a) (get i0 b))
-                    (* (get i0 a) (get i1 b))
+                    (get carry i3-1)
+                    (get carry i3-2)
+                    (get carry i3-3)
+                    (get remainder i2-1)
+                    (get remainder i2-2)
                   )))
-        (let ((i1 (+
+        (let (
+              (i1-1 { remainder: (remainder-uint64 (* (get i0 a) (get i0 b))), carry: (carry (* (get i0 a) (get i0 b))) })
+              (i1 (+
                     (carry i2)
-                    (* (get i0 a) (get i0 b))
+                    (get carry i2-1)
+                    (get carry i2-2)
+                    (get remainder i1-1)
                   )))
-        (let ((i0 (carry i1)))
+        (let ((i0 (+
+                    (carry i1)
+                    (get carry i1-1))))
         (ok (tuple
             (i0 i0)
             (i1 (remainder-uint64 i1))
@@ -846,12 +1127,48 @@
                   (get b val))))
               ))))
 
+(define-private (loop512-div-iter (i (buff 1))
+                                (val (tuple
+                                  (p uint)
+                                  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                                  (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                                  (q (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                                  (r (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                                  )))
+    (let ((t (unwrap-panic (uint512-rshift-overflow (get r val) u1))))
+        (if (unwrap-panic (uint512< t (get b val)))
+        (tuple 
+            (p (+ (get p val) u1)) 
+            (a (get a val)) 
+            (b (get b val)) 
+            (q (get q val))
+            (r (unwrap-panic (uint512-add-short
+                t 
+                (unwrap-panic (uint512-check-bit (get a val) (- u511 (get p val))))))))
+        (tuple
+            (p (+ (get p val) u1))
+            (a (get a val))
+            (b (get b val))
+            (q (unwrap-panic (uint512-add (get q val)
+                (unwrap-panic (uint512-rshift-overflow uint512-one (- u511 (get p val)))))))
+            (r (unwrap-panic (uint512-sub
+                  (unwrap-panic (uint512-add-short
+                    t
+                    (unwrap-panic (uint512-check-bit (get a val) (- u511 (get p val))))))
+                  (get b val))))
+              ))))
 
-;; (define-public (uint768-div (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
-;;                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))) 
-;;     (if (unwrap-panic (uint768-is-zero b))
-;;         (err 1)
-;;         (ok (get q (fold loop768-div-iter iter-buff-256 (tuple (p u0) (a a) (b b) (q uint768-zero) (r uint768-zero)))))))
+(define-read-only (uint512-mod (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+                               (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+    (if (unwrap-panic (uint512-is-zero b))
+        (err 1)
+        (ok (get r (fold loop512-div-iter iter-buff-512 (tuple (p u0) (a a) (b b) (q uint512-zero) (r uint512-zero)))))))
+
+(define-read-only (uint768-div (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
+                               (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))))
+    (if (unwrap-panic (uint768-is-zero b))
+        (err 1)
+        (ok (get q (fold loop768-div-iter iter-buff-256 (tuple (p u0) (a a) (b b) (q uint768-zero) (r uint768-zero)))))))
 
 (define-read-only (uint768-mod (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint)))
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint) (i8 uint) (i9 uint) (i10 uint) (i11 uint))))
@@ -859,8 +1176,15 @@
         (err 1)
         (ok (get r (fold loop768-div-iter iter-buff-768 (tuple (p u0) (a a) (b b) (q uint768-zero) (r uint768-zero)))))))
 
-(define-public (uint256-div (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))) 
+(define-read-only (uint256-euclid (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (if (unwrap-panic (uint256-is-zero b))
+          (err 1)
+          (ok (fold loop-div-iter iter-buff-256 (tuple (p u0) (a a) (b b) (q uint256-zero) (r uint256-zero))))))
+
+
+(define-read-only (uint256-div (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (if (unwrap-panic (uint256-is-zero b))
         (err 1)
         (ok (get q (fold loop-div-iter iter-buff-256 (tuple (p u0) (a a) (b b) (q uint256-zero) (r uint256-zero)))))))
@@ -871,7 +1195,7 @@
         (err 1)
         (ok (get r (fold loop-div-iter iter-buff-256 (tuple (p u0) (a a) (b b) (q uint256-zero) (r uint256-zero)))))))
 
-(define-public (uint512-to-uint256-overflow (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+(define-read-only (uint512-to-uint256-overflow (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
     (ok (tuple 
         (i0 (get i4 a))
         (i1 (get i5 a)) 
@@ -885,11 +1209,11 @@
         (i2 (get i10 a))
         (i3 (get i11 a)))))
 
-(define-public (uint-to-uint256 (a uint))
-    (ok (tuple 
+(define-read-only (uint-to-uint256 (a uint))
+    (ok (tuple
         (i0 u0)
-        (i1 u0) 
-        (i2 (/ a uint64-max-limit)) 
+        (i1 u0)
+        (i2 (/ a uint64-max-limit))
         (i3 (mod a uint64-max-limit)))))
 
 (define-read-only (uint256-mul-mod (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
@@ -901,7 +1225,7 @@
             a-mod  
             b-mod)))) m)))
 
-(define-public (uint256-mul-mod-short (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+(define-read-only (uint256-mul-mod-short (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
                             (b uint) 
                             (m (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (uint256-mod

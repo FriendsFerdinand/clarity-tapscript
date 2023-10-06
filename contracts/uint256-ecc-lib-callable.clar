@@ -43,23 +43,44 @@
         (if (and (uint256-is-eq (get x p1) (get x p2)) (uint256-is-eq (get y p1) (get y p2)))
             (if (uint256-is-zero (get y p1))
                 (ok (tuple (x uint256-zero) (y uint256-zero)))
-                (let 
-                    ((m (uint256-div 
-                        (uint256-mul-mod-short (uint256-mul-mod (get x p1) (get x p1) zk-p) u3 zk-p) 
-                        (uint256-mul-mod-short (get y p1) u2 zk-p)))) 
-                    (let ((m1 (uint256-mul-mod m m zk-p)) (m2 (uint256-mul-mod-short (get x p1) u2 zk-p)))
-                        (let ((x (uint256-sub 
-                            m1 
-                            m2)))
-                            (let ((yt (uint256-mul-mod m (uint256-sub (get x p1) x) zk-p))) 
+                (let
+                    ((m (uint256-div
+                          (uint256-mul-mod-short
+                            (uint256-mul-mod (get x p1) (get x p1) zk-p)
+                            u3
+                            zk-p)
+                          (uint256-mul-mod-short (get y p1) u2 zk-p))))
+                    (let (
+                        (m1 (uint256-mul-mod m m zk-p))
+                        (m2 (uint256-mul-mod-short (get x p1) u2 zk-p)))
+                        (let ((x (uint256-sub
+                              m1 
+                              m2)))
+                            (let ((yt (uint256-mul-mod m (uint256-sub (get x p1) x) zk-p)))
                                 (ok (tuple (x x) (y (uint256-sub yt (get y p1))))))))))
-            (if (uint256-is-eq (get x p1) (get x p2)) 
+            (if (uint256-is-eq (get x p1) (get x p2))
                 (ok (tuple (x uint256-zero) (y uint256-zero)))
-                (let ((mt (uint256-sub (get x p2) (get x p1))))
-                    (let ((m (uint256-div (uint256-sub (get y p2) (get y p1)) mt)))
-                        (let ((xt (uint256-sub (uint256-mul-mod m m zk-p) (get x p1))))
-                            (let ((x (uint256-sub xt (get x p2))))
-                                (let ((yt (uint256-mul-mod m (uint256-sub (get x p1) x) zk-p)))
+                (let ((mt (uint256-sub
+                            (get x p2)
+                            (get x p1))))
+                    (let ((m (uint256-div
+                              (uint256-sub
+                                (get y p2)
+                                (get y p1))
+                              mt)))
+                        (let ((xt (uint256-sub
+                                    (uint256-mul-mod
+                                      m
+                                      m
+                                      zk-p)
+                                    (get x p1))))
+                            (let ((x (uint256-sub
+                                        xt
+                                        (get x p2))))
+                                (let ((yt (uint256-mul-mod
+                                            m
+                                            (uint256-sub (get x p1) x)
+                                            zk-p)))
                                     (ok (tuple (x x) (y (uint256-sub yt (get y p1)))))))))))
             ))))
 
