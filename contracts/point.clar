@@ -5,6 +5,13 @@
 (define-constant iter-uint-256
   (list u255 u254 u253 u252 u251 u250 u249 u248 u247 u246 u245 u244 u243 u242 u241 u240 u239 u238 u237 u236 u235 u234 u233 u232 u231 u230 u229 u228 u227 u226 u225 u224 u223 u222 u221 u220 u219 u218 u217 u216 u215 u214 u213 u212 u211 u210 u209 u208 u207 u206 u205 u204 u203 u202 u201 u200 u199 u198 u197 u196 u195 u194 u193 u192 u191 u190 u189 u188 u187 u186 u185 u184 u183 u182 u181 u180 u179 u178 u177 u176 u175 u174 u173 u172 u171 u170 u169 u168 u167 u166 u165 u164 u163 u162 u161 u160 u159 u158 u157 u156 u155 u154 u153 u152 u151 u150 u149 u148 u147 u146 u145 u144 u143 u142 u141 u140 u139 u138 u137 u136 u135 u134 u133 u132 u131 u130 u129 u128 u127 u126 u125 u124 u123 u122 u121 u120 u119 u118 u117 u116 u115 u114 u113 u112 u111 u110 u109 u108 u107 u106 u105 u104 u103 u102 u101 u100 u99 u98 u97 u96 u95 u94 u93 u92 u91 u90 u89 u88 u87 u86 u85 u84 u83 u82 u81 u80 u79 u78 u77 u76 u75 u74 u73 u72 u71 u70 u69 u68 u67 u66 u65 u64 u63 u62 u61 u60 u59 u58 u57 u56 u55 u54 u53 u52 u51 u50 u49 u48 u47 u46 u45 u44 u43 u42 u41 u40 u39 u38 u37 u36 u35 u34 u33 u32 u31 u30 u29 u28 u27 u26 u25 u24 u23 u22 u21 u20 u19 u18 u17 u16 u15 u14 u13 u12 u11 u10 u9 u8 u7 u6 u5 u4 u3 u2 u1 u0)
 )
+(define-constant iter-test
+  (list
+    ;; u2
+    u1
+    u0
+  )
+)
 ;; (define-constant iter-buff-256 0x000000)
 (define-constant uint256-one (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u1)))
 (define-constant uint256-zero (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u0)))
@@ -49,6 +56,10 @@
                             (b uint) 
                             (m (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
     (unwrap-panic (contract-call? .uint256-lib uint256-mul-mod-short a b m)))
+
+(define-read-only (uint256-mul-short (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+                            (b uint))
+    (unwrap-panic (contract-call? .uint256-lib uint256-mul-short a b)))
 
 (define-read-only (uint256-mul-mod (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
                             (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) 
@@ -217,28 +228,6 @@
   )
 )
 
-;; (define-read-only (test-mod-inverse-fermat)
-;;   (let (
-;;         (x (tuple (i0 u8556433664616153256) (i1 u5526662592422800499) (i2 u3917034828251557896) (i3 u7155128606097153133)))
-;;         (p-2 (tuple (i0 u18446744073709551615) (i1 u18446744073709551615) (i2 u18446744073709551615) (i3 u18446744069414583341)))
-;;         (base (uint256-mod x p-uint256))
-;;         ;; (final (mod-inverse-fermat x p-2 p-uint256))
-;;         (final (hex-to-uint256 0xc2cfe6c4e0b5bb42ceea95ac8c7544e692f1ce3d1fb9ca196b6719c0c46d98b9))
-;;         (l_2 (uint512-mod (uint256-mul final final) p-uint512))
-;;       )
-;;     ;; {
-;;       ;; base: (unwrap-panic (contract-call? .uint256-lib uint256-to-hex (get base final))),
-;;       ;; exponent: (unwrap-panic (contract-call? .uint256-lib uint256-to-hex (get exponent final))),
-;;       ;; modulus: (unwrap-panic (contract-call? .uint256-lib uint256-to-hex (get modulus final))),
-;;       ;; (unwrap-panic (contract-call? .uint256-lib uint256-to-hex (get result final)))
-;;     ;; }
-;;     (uint256-to-hex l_2)
-;;   )
-;; )
-
-;; (x3: 0xdf0e99b655223a8414d76c0f0a379eb280c1b562f7acd096e33d1a35bed97ad4, y3: 0xd068ddeb8543af2b7b16b730f9a2f25943d5a89bb8943a431fa6ee8e4c970d68)
-
-
 (define-read-only (get-slope-hex
                     (p1-hex (tuple (x (buff 32)) (y (buff 32))))
                     (p2-hex (tuple (x (buff 32)) (y (buff 32)))))
@@ -256,34 +245,88 @@
                     (p1 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
                     (p2 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
   (let (
-    (y2-y1 (uint256-sub (get y p2) (get y p1)))
-    (x2-x1 (uint256-sub (get x p2) (get x p1)))
-    (x2-x1**minus1 (mod-inverse-fermat
-      x2-x1
-      (uint256-sub 
-        (tuple (i0 u18446744073709551615) (i1 u18446744073709551615) (i2 u18446744073709551615) (i3 u18446744069414583343))
-        (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u2))
+      (y1 (get y p1))
+      (y2 (get y p2))
+      (x1 (get x p1))
+      (x2 (get x p2))
+      (y2-y1
+        (if (uint256< y2 y1)
+          (uint256-mod (uint256-sub p-uint256 (uint256-sub y2 y1)) p-uint256)
+          (uint256-mod (uint256-sub y2 y1) p-uint256) )
       )
-      p-uint256
-      ))
-    (slope (uint512-mod (uint256-mul y2-y1 x2-x1**minus1) p-uint512))
+      (x2-x1
+        (if (uint256< x2 x1)
+          (uint256-mod (uint256-sub p-uint256 (uint256-sub x2 x1)) p-uint256)
+          (uint256-mod (uint256-sub x2 x1) p-uint256) )
+      )
+      (x2-x1**minus1
+        (mod-inverse-fermat
+          x2-x1
+          (uint256-sub
+            p-uint256
+            (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u2))
+          )
+          p-uint256
+        )
+      )
+      (slope (uint512-mod (uint256-mul y2-y1 x2-x1**minus1) p-uint512))
     )
     slope
   )
 )
 
+(define-read-only (debugging)
+  (let (
+    (p1
+      (tuple
+        (x (hex-to-uint256 0x33347485512e02596bc77c80c01dd1c1a2d96befe939422a6fda04669ec82020))
+        (y (hex-to-uint256 0x0d6243f43c748faf25b2f05639b2cbe954f8603271a61395ad4180c93a5d9777))
+      )
+    )
+    (p2
+      (tuple
+        (x (hex-to-uint256 0x1340a0cdc67100268fd325ff41ddc736e7fc2b078526758633e0c2d260fd1afa))
+        (y (hex-to-uint256 0x121352dc1ba32ce746c38f4c18eae7a3a9ff7f06002e9c12ecb259e05da9b622))
+      )
+    )
+    (slope (get-slope p1 p2))
+  )
+    ;; (asserts! (is-eq (uint256-to-hex (get x p-result)) 0x33347485512e02596bc77c80c01dd1c1a2d96befe939422a6fda04669ec82020) (err "problem!"))
+    ;; (asserts! (is-eq (uint256-to-hex (get y p-result)) 0x0d6243f43c748faf25b2f05639b2cbe954f8603271a61395ad4180c93a5d9777) (err "problem!"))
+    (ok {
+        slope: (uint256-to-hex slope),
+        ;; y: (uint256-to-hex (get y p-result))
+        })
+  )
+)
+
 (define-read-only (get-tangent-slope (p1 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
   (let (
-    (num (uint256-mul-mod-short (uint512-mod (uint256-mul (get x p1) (get x p1)) p-uint512) u3 p-uint256))
-    (den (mod-inverse-fermat
-          (uint256-mul-mod-short (get y p1) u2 p-uint256)
-          (uint256-sub 
-            (tuple (i0 u18446744073709551615) (i1 u18446744073709551615) (i2 u18446744073709551615) (i3 u18446744069414583343))
-            (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u2))
+    (num
+      (uint512-mod 
+        (uint256-mul
+          (uint512-mod (uint256-mul (get x p1) (get x p1)) p-uint512)
+          (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u3))
+        )
+        p-uint512
+      )
+    )
+    (den 
+          (mod-inverse-fermat
+            (uint512-mod
+              (uint256-mul
+                (get y p1)
+                (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u2)) )
+            p-uint512
+            )
+            (uint256-sub
+              p-uint256
+              (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u2))
+            )
+            p-uint256
           )
-          p-uint256))
-
-  )
+      )
+    )
     (uint512-mod (uint256-mul num den) p-uint512)
   )
 )
@@ -323,42 +366,17 @@
 (define-read-only (ecc-add (p1 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
                         (p2 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
 (if (is-zero-point p1)
-    ;; (ok p2)
-    (ok p-uint256)
+    (ok p2)
     (if (is-zero-point p2)
-        ;; (ok p1)
-        (ok p-uint256)
+        (ok p1)
         (if (and (uint256-is-eq (get x p1) (get x p2)) (uint256-is-eq (get y p1) (get y p2)))
             (if (uint256-is-zero (get y p1))
-                ;; (ok (tuple (x uint256-zero) (y uint256-zero)))
-                (ok p-uint256)
-                ;; (let
-                ;;     ((m (uint256-div
-                ;;           (uint256-mul-mod-short
-                ;;             (uint256-mul-mod (get x p1) (get x p1) p-uint256)
-                ;;             u3
-                ;;             p-uint256)
-                ;;           (uint256-mul-mod-short (get y p1) u2 p-uint256))))
-                ;;     (let (
-                ;;         (m1 (uint256-mul-mod m m p-uint256))
-                ;;         (m2 (uint256-mul-mod-short (get x p1) u2 p-uint256)))
-                ;;         (let ((x (uint256-sub
-                ;;               m1 
-                ;;               m2)))
-                ;;             (let ((yt (uint256-mul-mod m (uint256-sub (get x p1) x) p-uint256)))
-                ;;                 (ok (tuple (x x) (y (uint256-sub yt (get y p1)))))
-                ;;                 ;; (ok uint256-zero)
-                ;;                 ))))
-                ;; (ok (point-add p1 p2 
-                (ok (get-tangent-slope p1))
-                ;; ))
-                ;; (ok p-uint256)
+                (ok (tuple (x uint256-zero) (y uint256-zero)))
+                (ok (point-add p1 p2 (get-tangent-slope p1) ))
             )
             (if (uint256-is-eq (get x p1) (get x p2))
-                ;; (ok (tuple (x uint256-zero) (y uint256-zero)))
-                (ok p-uint256)
-                ;; (ok (point-add p1 p2 (get-slope p1 p2)))
-                (ok p-uint256)
+                (ok (tuple (x uint256-zero) (y uint256-zero)))
+                (ok (point-add p1 p2 (get-slope p1 p2)))
             )
             ))))
 
@@ -379,12 +397,35 @@
     )
     (p-result (unwrap-panic (ecc-add p1 p2)))
   )
-    ;; (asserts! (is-eq (uint256-to-hex (get x p-result)) 0xdf0e99b655223a8414d76c0f0a379eb280c1b562f7acd096e33d1a35bed97ad4) (err "problem!"))
-    ;; (asserts! (is-eq (uint256-to-hex (get y p-result)) 0xd068ddeb8543af2b7b16b730f9a2f25943d5a89bb8943a431fa6ee8e4c970d68) (err "problem!"))
-    ;; (ok {
-    ;;     x: (uint256-to-hex (get x p-result)),
-    ;;     y: (uint256-to-hex (get y p-result)) })
-    u0
+    (asserts! (is-eq (uint256-to-hex (get x p-result)) 0xdf0e99b655223a8414d76c0f0a379eb280c1b562f7acd096e33d1a35bed97ad4) (err "problem!"))
+    (asserts! (is-eq (uint256-to-hex (get y p-result)) 0xd068ddeb8543af2b7b16b730f9a2f25943d5a89bb8943a431fa6ee8e4c970d68) (err "problem!"))
+    (ok {
+        x: (uint256-to-hex (get x p-result)),
+        y: (uint256-to-hex (get y p-result)) })
+  )
+)
+
+(define-read-only (sum-test-3)
+  (let (
+    (p1
+      (tuple
+        (x (hex-to-uint256 0x33347485512e02596bc77c80c01dd1c1a2d96befe939422a6fda04669ec82020))
+        (y (hex-to-uint256 0x0d6243f43c748faf25b2f05639b2cbe954f8603271a61395ad4180c93a5d9777))
+      )
+    )
+    (p2
+      (tuple
+        (x (hex-to-uint256 0x1340a0cdc67100268fd325ff41ddc736e7fc2b078526758633e0c2d260fd1afa))
+        (y (hex-to-uint256 0x121352dc1ba32ce746c38f4c18eae7a3a9ff7f06002e9c12ecb259e05da9b622))
+      )
+    )
+    (p-result (unwrap-panic (ecc-add p1 p2)))
+  )
+    ;; (asserts! (is-eq (uint256-to-hex (get x p-result)) 0x33347485512e02596bc77c80c01dd1c1a2d96befe939422a6fda04669ec82020) (err "problem!"))
+    ;; (asserts! (is-eq (uint256-to-hex (get y p-result)) 0x0d6243f43c748faf25b2f05639b2cbe954f8603271a61395ad4180c93a5d9777) (err "problem!"))
+    (ok {
+        x: (uint256-to-hex (get x p-result)),
+        y: (uint256-to-hex (get y p-result)) })
   )
 )
 
@@ -406,12 +447,11 @@
     )
     (p-result (unwrap-panic (ecc-add p1 p2)))
   )
-    ;; (asserts! (is-eq (uint256-to-hex (get x p-result)) 0xdf0e99b655223a8414d76c0f0a379eb280c1b562f7acd096e33d1a35bed97ad4) (err "problem!"))
-    ;; (asserts! (is-eq (uint256-to-hex (get y p-result)) 0xd068ddeb8543af2b7b16b730f9a2f25943d5a89bb8943a431fa6ee8e4c970d68) (err "problem!"))
-    ;; (ok {
-    ;;     x: (uint256-to-hex (get x p-result)),
-    ;;     y: (uint256-to-hex (get y p-result)) })
-    u0
+    (asserts! (is-eq (uint256-to-hex (get x p-result)) 0x33347485512e02596bc77c80c01dd1c1a2d96befe939422a6fda04669ec82020) (err "problem!"))
+    (asserts! (is-eq (uint256-to-hex (get y p-result)) 0x0d6243f43c748faf25b2f05639b2cbe954f8603271a61395ad4180c93a5d9777) (err "problem!"))
+    (ok {
+        x: (uint256-to-hex (get x p-result)),
+        y: (uint256-to-hex (get y p-result)) })
   )
 )
 
@@ -434,38 +474,82 @@
   )
 )
 
-;; df0e99b655223a8414d76c0f0a379eb280c1b562f7acd096e33d1a35bed97ad4
-;; d068ddeb8543af2b7b16b730f9a2f25943d5a89bb8943a431fa6ee8e4c970d68
-
-
-
 (define-read-only (loop-bits-256
-    (i (buff 1))
+    (i uint)
     (acc 
       (tuple
-        (idx uint)
-        (point (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+        (result (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
+        (point (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
+        (scalar (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
         (count uint)
+        (results (list 256 (tuple (x (buff 32)) (y (buff 32)))))
       )
     )
   )
-    (if (> (unwrap-panic (contract-call? .uint256-lib uint256-check-bit (get point acc) (get idx acc))) u0)
-      {
-        idx:   (+ (get idx acc) u1) ,
-        point: (get point acc),
-        count: (+ (get count acc) u1)
-      }
-      {
-        idx:   (+ (get idx acc) u1),
-        point: (get point acc),
-        count: (get count acc)
-      }
+    (let (
+      (double_r (unwrap-panic (ecc-add (get result acc) (get result acc))))
+    )
+      (if (> (uint256-check-bit (get scalar acc) i) u0)
+        (let (
+          (last-add (unwrap-panic (ecc-add double_r (get point acc))))
+        )
+          {
+            result: last-add,
+            point: (get point acc),
+            scalar: (get scalar acc),
+            count: (+ u1 (get count acc)),
+            results: (unwrap-panic (as-max-len? (append (get results acc) (tuple (x (uint256-to-hex (get x double_r))) (y (uint256-to-hex (get y double_r))) )) u256))
+          }
+        )
+        {
+          result: double_r,
+          point: (get point acc),
+          scalar: (get scalar acc),
+          count: (get count acc),
+          results: (unwrap-panic (as-max-len? (append (get results acc) (tuple (x (uint256-to-hex (get x double_r))) (y (uint256-to-hex (get y double_r))) )) u6))
+        }
+      )
     )
 )
 
-(define-read-only (txG (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-  (fold loop-bits-256 iter-buff-256 { idx: u0, point: a, count: u0 })
+
+(define-read-only (scalar-mul
+  (scalar (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (a (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
+  )
+  (let (
+    (scalar-uint256 u0)
+  )
+    (fold loop-bits-256 iter-test { result: (tuple (x uint256-zero) (y uint256-zero)),  point: a, scalar: scalar, count: u0, results: (list) })
+  )
 )
+
+(define-read-only (test-txG-1)
+  (let (
+    (p1
+      (tuple
+        (x (hex-to-uint256 0x1340a0cdc67100268fd325ff41ddc736e7fc2b078526758633e0c2d260fd1afa))
+        (y (hex-to-uint256 0x121352dc1ba32ce746c38f4c18eae7a3a9ff7f06002e9c12ecb259e05da9b622))
+      )
+    )
+    (scalar (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u3)))
+    (p-result (scalar-mul scalar p1))
+  )
+    ;; (asserts! (is-eq (uint256-to-hex (get x p-result)) 0x33347485512e02596bc77c80c01dd1c1a2d96befe939422a6fda04669ec82020) (err "problem!"))
+    ;; (asserts! (is-eq (uint256-to-hex (get y p-result)) 0x0d6243f43c748faf25b2f05639b2cbe954f8603271a61395ad4180c93a5d9777) (err "problem!"))
+    (ok {
+        result-x: (uint256-to-hex (get x (get result p-result))),
+        result-y: (uint256-to-hex (get y (get result p-result))),
+        point-x: (uint256-to-hex (get x (get point p-result))),
+        point-y: (uint256-to-hex (get y (get point p-result))),
+        scalar: (uint256-to-hex (get scalar p-result)),
+        count: (get count p-result),
+        ALL: (get results p-result),
+        })
+  )
+)
+
+
 
 (define-read-only (test-me)
   (let (
