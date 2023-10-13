@@ -437,6 +437,40 @@
 
 (define-read-only (test-tweak-pubkey-1)
   (let (
+    (tweak (hex-to-uint256 0x0000000000000000000000000000000000000000000000000000000000000002))
+    (pubkey (tuple (x (hex-to-uint256 0x1340a0cdc67100268fd325ff41ddc736e7fc2b078526758633e0c2d260fd1afa)) (y (hex-to-uint256 0x121352dc1ba32ce746c38f4c18eae7a3a9ff7f06002e9c12ecb259e05da9b622))))
+    (tweaked-point (tweak-pubkey tweak pubkey))
+  )
+
+  (asserts! (is-eq (uint256-to-hex (get x tweaked-point)) 0xc9e2a87dfb567263856a23277435e860359c5b480f7ce4108790b9300e2668c2) (err "problem!"))
+  (asserts! (is-eq (uint256-to-hex (get y tweaked-point)) 0x434b4967fb4fd4f94d9049329a35c571c43d0875bb5f3f7ca672b756a72eeff0) (err "problem!"))
+
+  (ok {
+        x: (uint256-to-hex (get x tweaked-point)),
+        y: (uint256-to-hex (get y tweaked-point)),
+         })
+  )
+)
+
+(define-read-only (test-tweak-pubkey-2)
+  (let (
+    (tweak (hex-to-uint256 0x0000000000000000000000000000000000000000000000000000000000000003))
+    (pubkey (tuple (x (hex-to-uint256 0x1340a0cdc67100268fd325ff41ddc736e7fc2b078526758633e0c2d260fd1afa)) (y (hex-to-uint256 0x121352dc1ba32ce746c38f4c18eae7a3a9ff7f06002e9c12ecb259e05da9b622))))
+    (tweaked-point (tweak-pubkey tweak pubkey))
+  )
+
+  ;; (asserts! (is-eq (uint256-to-hex (get x tweaked-point)) 0xc9e2a87dfb567263856a23277435e860359c5b480f7ce4108790b9300e2668c2) (err "problem!"))
+  ;; (asserts! (is-eq (uint256-to-hex (get y tweaked-point)) 0x434b4967fb4fd4f94d9049329a35c571c43d0875bb5f3f7ca672b756a72eeff0) (err "problem!"))
+
+  (ok {
+        x: (uint256-to-hex (get x tweaked-point)),
+        y: (uint256-to-hex (get y tweaked-point)),
+         })
+  )
+)
+
+(define-read-only (debug-test-tweak-pubkey-1)
+  (let (
     (tweak (hex-to-uint256 0x45f3b51eeac2e7610fa7902abfce05c3f6a9f3599fa5cc004b269bb9c10baf28))
     (tweak-point (txG tweak))
     ;; (tweak-point (tuple (x (hex-to-uint256 0x1634e9b9bbfbda67b81f8c7c1e4c35ceb3fb113d42ae5cb92bc30d572f2b08b4)) (y (hex-to-uint256 0xb0277922a1f80f43b06f08d1fc571c7d41f8dc09ab63f7ae109b255421da6a71))))
@@ -449,7 +483,7 @@
 
   (ok {
         tweak-x: (uint256-to-hex (get x tweak-point)),
-        tweak-y: (uint256-to-hex (get x tweak-point)),
+        tweak-y: (uint256-to-hex (get y tweak-point)),
         x: (uint256-to-hex (get x tweaked-point)),
         y: (uint256-to-hex (get y tweaked-point)),
          })
