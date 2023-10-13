@@ -427,6 +427,35 @@
   )
 )
 
+(define-read-only (tweak-pubkey
+  (tweak (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (pubkey (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
+  (let ((tweak-point (txG tweak)))
+    (unwrap-panic (ecc-add tweak-point pubkey))
+  )
+)
+
+(define-read-only (test-tweak-pubkey-1)
+  (let (
+    (tweak (hex-to-uint256 0x45f3b51eeac2e7610fa7902abfce05c3f6a9f3599fa5cc004b269bb9c10baf28))
+    (tweak-point (txG tweak))
+    ;; (tweak-point (tuple (x (hex-to-uint256 0x1634e9b9bbfbda67b81f8c7c1e4c35ceb3fb113d42ae5cb92bc30d572f2b08b4)) (y (hex-to-uint256 0xb0277922a1f80f43b06f08d1fc571c7d41f8dc09ab63f7ae109b255421da6a71))))
+    (pubkey (tuple (x (hex-to-uint256 0x1340a0cdc67100268fd325ff41ddc736e7fc2b078526758633e0c2d260fd1afa)) (y (hex-to-uint256 0x121352dc1ba32ce746c38f4c18eae7a3a9ff7f06002e9c12ecb259e05da9b622))))
+    (tweaked-point (unwrap-panic (ecc-add tweak-point pubkey)))
+  )
+
+  ;; (asserts! (is-eq (uint256-to-hex (get x tweaked-point)) 0xaf5e6479a4af8f0745649554245110d1b408baed0f48feb49437f86ede2ddbdf) (err "problem!"))
+  ;; (asserts! (is-eq (uint256-to-hex (get y tweaked-point)) 0x23d9bc8164816e41c89a7d2195f373ba17895be899b07df9011ac8b6847dfb31) (err "problem!"))
+
+  (ok {
+        tweak-x: (uint256-to-hex (get x tweak-point)),
+        tweak-y: (uint256-to-hex (get x tweak-point)),
+        x: (uint256-to-hex (get x tweaked-point)),
+        y: (uint256-to-hex (get y tweaked-point)),
+         })
+  )
+)
+
 (define-read-only (test-txG-1)
   (let (
     (scalar (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u2)))
