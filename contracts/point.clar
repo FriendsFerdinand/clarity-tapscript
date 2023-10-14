@@ -405,6 +405,13 @@
   )
 )
 
+(define-read-only (from-compressed (compressed-pubkey (buff 33)))
+  {
+    x: (hex-to-uint256 (unwrap-panic (as-max-len? (unwrap-panic (slice? compressed-pubkey u1 u33)) u32))),
+    y: (get-y-from-compressed-pubkey compressed-pubkey)
+  }
+)
+
 ;; (define-read-only (test-get-y-from-xpubkey-1)
 ;;   (let (
 ;;     (seckey (hex-to-uint256 0x0a7d01d1c2e1592a02ea7671bb79ecd31d8d5e660b008f4b10e67787f4f24712))
@@ -425,6 +432,10 @@
 ;;          })
 ;;   )
 ;; )
+
+(define-read-only (tweak-pubkey-hex (taptweak (buff 32)) (compressed-pubkey (buff 33)))
+  (tweak-pubkey (hex-to-uint256 taptweak) (from-compressed compressed-pubkey))
+)
 
 (define-read-only (tweak-pubkey
   (tweak (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
