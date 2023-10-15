@@ -7,7 +7,10 @@
 
 (define-constant iter-uint-256-test
   (list
-  u255 u254 u253 u252 u251 u250 u249 u248 u247 u246 u245 u244 u243 u242 u241 u240 u239 u238 u237 u236 u235 u234 u233 u232 u231 u230 u229 u228 u227 u226 u225 u224 u223 u222 u221 u220 u219 u218 u217 u216 u215 u214 u213 u212 u211 u210 u209 u208 u207 u206 u205 u204 u203 u202 u201 u200 u199 u198 u197 u196 u195 u194 u193 u192 u191 u190 u189 u188 u187 u186 u185 u184 u183 u182 u181 u180 u179 u178 u177 u176 u175 u174 u173 u172 u171 u170 u169 u168 u167 u166 u165 u164 u163 u162 u161 u160 u159 u158 u157 u156 u155 u154 u153 u152 u151 u150 u149 u148 u147 u146 u145 u144 u143 u142 u141 u140 u139 u138 u137 u136 u135 u134 u133 u132 u131 u130 u129 u128 u127 u126 u125 u124 u123 u122 u121 u120 u119 u118 u117 u116 u115 u114 u113 u112 u111 u110 u109 u108 u107 u106 u105 u104 u103 u102 u101 u100 u99 u98 u97 u96 u95 u94 u93 u92 u91 u90 u89 u88 u87 u86 u85 u84 u83 u82 u81 u80 u79 u78 u77 u76 u75 u74 u73 u72 u71 u70 u69 u68 u67 u66 u65 u64 u63 u62 u61 u60 u59 u58 u57 u56 u55 u54 u53 u52 u51 u50 u49 u48 u47 u46 u45 u44 u43 u42 u41 u40 u39 u38 u37 u36 u35 u34 u33 u32 u31 u30 u29 u28 u27 u26 u25 u24 u23 u22 u21 u20 u19 u18 u17 u16 u15 u14 u13 u12 u11 u10 u9 u8 u7 u6 u5 u4 u3 u2 u1 u0))
+  ;; u255 u254 u253 u252 u251 u250 u249 u248 u247 u246 u245 u244 u243 u242 u241 u240 u239 u238 u237 u236 u235 u234 u233 u232 u231 u230 u229 u228 u227 u226 u225 u224 u223 u222 u221 u220 u219 u218 u217 u216 u215 u214 u213 u212 u211 u210 u209 u208 u207 u206 u205 u204 u203 u202 u201 u200 u199 u198 u197 u196 u195 u194 u193 u192 u191 u190 u189 u188 u187 u186 u185 u184 u183 u182 u181 u180 u179 u178 u177 u176 u175 u174 u173 u172 u171 u170 u169 u168 u167 u166 u165 u164 u163 u162 u161 u160 u159 u158 u157 u156 u155 u154 u153 u152 u151 u150 u149 u148 u147 u146 u145 u144 u143 u142 u141 u140 u139 u138 u137 u136 u135 u134 u133 u132 u131 u130 u129 u128 u127 u126 u125 u124 u123 u122 u121
+  ;;  u120 u119 u118 u117 u116 u115 u114 u113 u112 u111 u110 u109 u108 u107 u106 u105 u104 u103 u102 u101 u100 u99 u98 u97 u96 u95 u94 u93 u92 u91 u90 u89 u88 u87 u86 u85 u84 u83 u82 u81 u80 u79 u78 u77 u76 u75 u74 u73 u72 u71 u70 u69 u68 u67 u66 u65 u64 u63 u62 u61 u60 u59 u58 u57 u56 u55 u54 u53 u52 u51 u50 u49 u48 u47 u46 u45 u44 u43 u42 u41 u40 u39 u38 u37 u36 u35 u34 u33 u32
+   u31 u30 u29 u28 u27 u26 u25 u24 u23 u22 u21 u20 u19 u18 u17 u16 u15 u14 u13 u12 u11 u10 u9 u8 u7 u6 u5 u4
+   u3 u2 u1 u0))
 
 
 (define-constant uint256-zero (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u0)))
@@ -516,20 +519,26 @@
 (define-read-only (debug-test-tweak-pubkey-1)
   (let (
     (tweak (hex-to-uint256 0x45f3b51eeac2e7610fa7902abfce05c3f6a9f3599fa5cc004b269bb9c10baf28))
-    (tweak-point (get result (txG tweak)))
+    (tweak-point (txG tweak))
     ;; (tweak-point (tuple (x (hex-to-uint256 0x1634e9b9bbfbda67b81f8c7c1e4c35ceb3fb113d42ae5cb92bc30d572f2b08b4)) (y (hex-to-uint256 0xb0277922a1f80f43b06f08d1fc571c7d41f8dc09ab63f7ae109b255421da6a71))))
     (pubkey (tuple (x (hex-to-uint256 0x1340a0cdc67100268fd325ff41ddc736e7fc2b078526758633e0c2d260fd1afa)) (y (hex-to-uint256 0x121352dc1ba32ce746c38f4c18eae7a3a9ff7f06002e9c12ecb259e05da9b622))))
-    (tweaked-point (unwrap-panic (ecc-add tweak-point pubkey)))
+    (tweaked-point (unwrap-panic (ecc-add (get result tweak-point) pubkey)))
   )
 
   ;; (asserts! (is-eq (uint256-to-hex (get x tweaked-point)) 0xaf5e6479a4af8f0745649554245110d1b408baed0f48feb49437f86ede2ddbdf) (err "problem!"))
   ;; (asserts! (is-eq (uint256-to-hex (get y tweaked-point)) 0x23d9bc8164816e41c89a7d2195f373ba17895be899b07df9011ac8b6847dfb31) (err "problem!"))
 
   (ok {
-        tweak-x: (uint256-to-hex (get x tweak-point)),
-        tweak-y: (uint256-to-hex (get y tweak-point)),
+        tweak-x: (uint256-to-hex (get x tweaked-point)),
+        tweak-y: (uint256-to-hex (get y tweaked-point)),
         x: (uint256-to-hex (get x tweaked-point)),
         y: (uint256-to-hex (get y tweaked-point)),
+        point-x: (uint256-to-hex (get x (get point tweak-point))),
+        point-y: (uint256-to-hex (get y (get point tweak-point))),
+        scalar: (uint256-to-hex (get scalar tweak-point)),
+        count: (get count tweak-point),
+        DOUBLE_RS: (get double_rs tweak-point),
+        ADDS: (get add tweak-point),
          })
   )
 )

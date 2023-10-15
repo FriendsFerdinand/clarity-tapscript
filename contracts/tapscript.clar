@@ -13,6 +13,9 @@
   )
 )
 
+;; TODO: GENERATE CBLOCK
+
+
 ;; pubkey: 0x1340a0cdc67100268fd325ff41ddc736e7fc2b078526758633e0c2d260fd1afa
 ;; version: 0xc0
 ;; script: 0x519fb620bed0d5dada5f4ccf61024ba8500fc9bd95af04ff34fe0d5a5ddc37cc
