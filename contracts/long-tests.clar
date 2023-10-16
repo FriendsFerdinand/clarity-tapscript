@@ -101,7 +101,7 @@
 
 (define-public (test-txG-steps-a-1)
   (let (
-    (scalar (contract-call? .point hex-to-uint256 0x0000000000000000000000000000000000000000000010000000000000000100))
+    (scalar (contract-call? .point hex-to-uint256 0x1e409779582e92bb9bb50e4ac01f0f8bc73b79a678aabd5ae85eda180babc19c))
     (p-result 
       (txG-steps
         (tuple (x uint256-zero) (y uint256-zero))
@@ -116,8 +116,8 @@
     (var-set pos-temp (get pos p-result))
     (var-set double_rs-temp (get double_rs p-result))
     (var-set add-temp (get add p-result))
-    ;; (asserts! (is-eq (uint256-to-hex (get x p-result)) 0x037c019f56a82662e04a82cc9777618604f4f59afdd684716c762b662de2569c) (err "problem!"))
-    ;; (asserts! (is-eq (uint256-to-hex (get y p-result)) 0x7f547d35fc3f1a080b88e7ca16ff932c028acfc890d06ed1aed84d41c3412eb2) (err "problem!"))
+    ;; (asserts! (is-eq (uint256-to-hex (get x p-result)) 0x6eadfbf6201a6845ad32c947b99c25aaff4c5ae61800c53928f0c88a70084b77) (err "problem!"))
+    ;; (asserts! (is-eq (uint256-to-hex (get y p-result)) 0x88cc90fb2cd35d3dcd6f7d39b025ccaea1e58572b3b59f53ebc312e77c70ceb5) (err "problem!"))
     (ok {
         result-x: (contract-call? .point uint256-to-hex (get x (get result p-result))),
         result-y: (contract-call? .point uint256-to-hex (get y (get result p-result))),
@@ -147,8 +147,7 @@
     (var-set pos-temp (get pos p-result))
     (var-set double_rs-temp (get double_rs p-result))
     (var-set add-temp (get add p-result))
-    ;; (asserts! (is-eq (uint256-to-hex (get x p-result)) 0x037c019f56a82662e04a82cc9777618604f4f59afdd684716c762b662de2569c) (err "problem!"))
-    ;; (asserts! (is-eq (uint256-to-hex (get y p-result)) 0x7f547d35fc3f1a080b88e7ca16ff932c028acfc890d06ed1aed84d41c3412eb2) (err "problem!"))
+
     (ok {
         result-x: (contract-call? .point uint256-to-hex (get x (get result p-result))),
         result-y: (contract-call? .point uint256-to-hex (get y (get result p-result))),
