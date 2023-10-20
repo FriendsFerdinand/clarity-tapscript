@@ -103,15 +103,15 @@
     (ok (< (unwrap-panic (uint256-cmp a b)) 0)))
 
 (define-read-only (uint256-is-zero (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-    (ok (if (is-eq (get i0 a) u0)
-        (if (is-eq (get i1 a) u0)
-            (if (is-eq (get i2 a) u0)
-                (if (is-eq (get i3 a) u0)
-                    true
-                    false)
-                false)
-            false)
-        false)))
+  (ok (if (is-eq (get i0 a) u0)
+    (if (is-eq (get i1 a) u0)
+      (if (is-eq (get i2 a) u0)
+        (if (is-eq (get i3 a) u0)
+          true
+          false)
+        false)
+      false)
+  false)))
 
 (define-private (loop-bits-iter (i (buff 1))
                                 (val (tuple (num uint) (res uint))))                         

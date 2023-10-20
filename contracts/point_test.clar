@@ -19,8 +19,7 @@
 (define-read-only (tweak-pubkey
   (tweak (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
   (pubkey (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
-  (contract-call? .point tweak-pubkey tweak pubkey))
-
+  (contract-call? .tapscript tweak-pubkey tweak pubkey))
 
 ;; add differing points #1
 (define-read-only (test-sum-1)
