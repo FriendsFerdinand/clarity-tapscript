@@ -5,6 +5,16 @@ authors = []
 telemetry = true
 cache_dir = './.cache'
 requirements = []
+[contracts.clarity-bitcoin-helper]
+path = 'contracts/external/clarity-bitcoin-helper.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.clarity-bitcoin-v5]
+path = 'contracts/external/clarity-bitcoin-v5.clar'
+clarity_version = 2
+epoch = 2.4
+
 [contracts.ecc-lib]
 path = 'contracts/ecc-lib.clar'
 clarity_version = 2
