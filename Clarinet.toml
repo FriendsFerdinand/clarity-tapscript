@@ -20,8 +20,18 @@ path = 'contracts/point.clar'
 clarity_version = 2
 epoch = 2.4
 
+[contracts.point_test]
+path = 'contracts/point_test.clar'
+clarity_version = 2
+epoch = 2.4
+
 [contracts.tapscript]
 path = 'contracts/tapscript.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.tapscript_test]
+path = 'contracts/tapscript_test.clar'
 clarity_version = 2
 epoch = 2.4
 
