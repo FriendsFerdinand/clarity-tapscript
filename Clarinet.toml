@@ -5,6 +5,11 @@ authors = []
 telemetry = true
 cache_dir = './.cache'
 requirements = []
+[contracts.bitcoin-helper]
+path = 'contracts/bitcoin-helper.clar'
+clarity_version = 2
+epoch = 2.4
+
 [contracts.clarity-bitcoin-helper]
 path = 'contracts/external/clarity-bitcoin-helper.clar'
 clarity_version = 2
@@ -12,6 +17,16 @@ epoch = 2.4
 
 [contracts.clarity-bitcoin-v5]
 path = 'contracts/external/clarity-bitcoin-v5.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.commit]
+path = 'contracts/commit.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.commit-helper]
+path = 'contracts/commit-helper.clar'
 clarity_version = 2
 epoch = 2.4
 
@@ -42,6 +57,11 @@ epoch = 2.4
 
 [contracts.tapscript_test]
 path = 'contracts/tapscript_test.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.transaction-storage]
+path = 'contracts/transaction-storage.clar'
 clarity_version = 2
 epoch = 2.4
 

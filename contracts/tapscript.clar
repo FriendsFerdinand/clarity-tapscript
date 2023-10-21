@@ -3,6 +3,7 @@
 (define-constant TapTweak 0x546170547765616b)
 
 (define-constant default-version u192)
+(define-constant last-byte-consensus-uint-pos u17)
 
 (define-read-only (get-tapscript-scriptpubkey (compressed-pubkey (buff 33)) (version (buff 1)) (script (buff 128)))
   (concat 0x5120 (get-tapscript-tweak compressed-pubkey version script)))
@@ -45,7 +46,11 @@
 (define-read-only (get-control-bit (version (buff 1)) (parity-bit (buff 1)))
   (if (is-eq parity-bit 0x02)
     version
-    (unwrap-panic (slice? (unwrap-panic (to-consensus-buff? (+ (buff-to-uint-be version) u1))) u16 u17)) )
+    (hex-add-byte version u1))
+)
+
+(define-read-only (hex-add-byte (byte (buff 1)) (a uint))
+  (unwrap-panic (slice? (unwrap-panic (to-consensus-buff? (+ (buff-to-uint-be byte) a))) (- last-byte-consensus-uint-pos u1) last-byte-consensus-uint-pos))
 )
 
 (define-read-only (get-tap-leaf (data (buff 128)))
