@@ -25,16 +25,6 @@ path = 'contracts/commit.clar'
 clarity_version = 2
 epoch = 2.4
 
-[contracts.commit-helper]
-path = 'contracts/commit-helper.clar'
-clarity_version = 2
-epoch = 2.4
-
-[contracts.ecc-lib]
-path = 'contracts/ecc-lib.clar'
-clarity_version = 2
-epoch = 2.4
-
 [contracts.long-tests]
 path = 'contracts/long-tests.clar'
 clarity_version = 2
@@ -66,17 +56,17 @@ clarity_version = 2
 epoch = 2.4
 
 [contracts.uint256-lib]
-path = 'contracts/uint256-lib.clar'
+path = 'contracts/math/uint256-lib.clar'
 clarity_version = 2
 epoch = 2.4
 
 [contracts.uint512-lib]
-path = 'contracts/uint512-lib.clar'
+path = 'contracts/math/uint512-lib.clar'
 clarity_version = 2
 epoch = 2.4
 
 [contracts.uint768-lib]
-path = 'contracts/uint768-lib.clar'
+path = 'contracts/math/uint768-lib.clar'
 clarity_version = 2
 epoch = 2.4
 [repl.analysis]

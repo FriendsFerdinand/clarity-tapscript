@@ -6,7 +6,6 @@
     u15 u14 u13 u12 u11 u10 u9 u8 u7 u6 u5 u4 u3 u2 u1 u0
    ))
 
-
 (define-constant uint256-zero (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u0)))
 (define-constant uint256-one (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u1)))
 (define-constant uint256-four (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u4)))

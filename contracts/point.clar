@@ -15,58 +15,27 @@
 (define-constant Gx (tuple (i0 u8772561819708210092) (i1 u6170039885052185351) (i2 u188021827762530521) (i3 u6481385041966929816)))
 (define-constant Gy (tuple (i0 u5204712524664259685) (i1 u6747795201694173352) (i2 u18237243440184513561) (i3 u11261198710074299576)))
 
-(define-read-only (is-zero-point (p (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))) 
+(define-read-only (is-zero-point
+  (p (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
   (and
     (uint256-is-zero (get x p))
     (uint256-is-zero (get y p)))
 )
 
-(define-read-only (uint256-sub-mod (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                                   (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-  (if (uint256< a b)
-    (uint256-mod (uint256-sub p-uint256 (uint256-sub a b)) p-uint256)
-    (uint256-mod (uint256-sub a b) p-uint256)))
-
-(define-read-only (hex-to-uint256 (hex (buff 32)))
-  (unwrap-panic (contract-call? .uint256-lib hex-to-uint256 hex)))
-
-(define-read-only (uint256-to-hex (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-  (unwrap-panic (contract-call? .uint256-lib uint256-to-hex a)))
-
-(define-read-only (uint512-mod (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
-  (let (
-    (result (unwrap-panic (contract-call? .uint512-lib uint512-mod a b))))
-    {
-      i0: (get i4 result),
-      i1: (get i5 result),
-      i2: (get i6 result),
-      i3: (get i7 result),
-    }))
-
-(define-read-only (uint512-to-hex (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
-  (unwrap-panic (contract-call? .uint512-lib uint512-to-hex a)))
-
-(define-read-only (uint512-to-uint256-overflow (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
-  (unwrap-panic (contract-call? .uint512-lib uint512-to-uint256-overflow a)))
-
-(define-read-only (uint256-check-bit (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (b uint))
-  (unwrap-panic (contract-call? .uint256-lib uint256-check-bit a b)))
-
 (define-private (square-and-multiply-iter
-                  (s uint)
-                  (acc (tuple
-                    (base (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                    (exponent (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                    (result (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                    (modulus (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
+  (s uint)
+  (acc (tuple
+    (base (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+    (exponent (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+    (result (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+    (modulus (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
   (let (
     (base (get base acc))
     (exponent (get exponent acc))
     (modulus (get modulus acc))
     (result (uint512-mod
-              (uint256-mul (get result acc) (get result acc))
-              (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u0) (i4 (get i0 modulus)) (i5 (get i1 modulus)) (i6 (get i2 modulus)) (i7 (get i3 modulus))))))
+      (uint256-mul (get result acc) (get result acc))
+      (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u0) (i4 (get i0 modulus)) (i5 (get i1 modulus)) (i6 (get i2 modulus)) (i7 (get i3 modulus))))))
     (if (> (uint256-check-bit exponent s) u0)
       (let (
         (mod-result
@@ -89,9 +58,9 @@
       })))
 
 (define-read-only (square-and-multiply
-                    (base (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                    (exponent (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                    (modulus (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (base (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (exponent (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (modulus (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
   (let (
     ;; if base >= modulus
     (base-mod (if (uint256> base p-uint256) (uint256-mod base p-uint256) base)))
@@ -103,31 +72,35 @@
         modulus: modulus
       }))))
 
-(define-read-only (mod-sqrt (base (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (p (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+;; modulo square root, only works if p is prime
+(define-read-only (mod-sqrt
+  (base (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (p (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
   (let ((exponent (uint256-div (uint256-add p uint256-one) uint256-four)))
     (square-and-multiply base exponent p-uint256)))
 
 (define-read-only (get-slope
-                    (p1 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
-                    (p2 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
+  (p1 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
+  (p2 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
   (let (
-      (y1 (get y p1))
-      (y2 (get y p2))
-      (x1 (get x p1))
-      (x2 (get x p2))
-      (y2-y1 (uint256-sub-mod y2 y1))
-      (x2-x1 (uint256-sub-mod x2 x1))
-      (x2-x1**minus1
-        (square-and-multiply
-          x2-x1
-          (uint256-sub
-            p-uint256
-            (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u2)))
-          p-uint256))
-      (slope (uint512-mod (uint256-mul y2-y1 x2-x1**minus1) p-uint512)))
+    (y1 (get y p1))
+    (y2 (get y p2))
+    (x1 (get x p1))
+    (x2 (get x p2))
+    (y2-y1 (uint256-sub-mod y2 y1))
+    (x2-x1 (uint256-sub-mod x2 x1))
+    (x2-x1**minus1
+      (square-and-multiply
+        x2-x1
+        (uint256-sub
+          p-uint256
+          (tuple (i0 u0) (i1 u0) (i2 u0) (i3 u2)))
+        p-uint256))
+    (slope (uint512-mod (uint256-mul y2-y1 x2-x1**minus1) p-uint512)))
     slope))
 
-(define-read-only (get-tangent-slope (p1 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
+(define-read-only (get-tangent-slope
+  (p1 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
   (let (
     (num
       (uint512-mod
@@ -163,30 +136,31 @@
     (y3 (uint256-mod (uint256-sub-mod m_x1-x3 y1) p-uint256)))
     { x: x3, y: y3 }))
 
-(define-read-only (ecc-add (p1 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
-                        (p2 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
-(if (is-zero-point p1)
-  (ok p2)
-  (if (is-zero-point p2)
-    (ok p1)
-    (if (and (uint256-is-eq (get x p1) (get x p2)) (uint256-is-eq (get y p1) (get y p2)))
-      (if (uint256-is-zero (get y p1))
-        (ok (tuple (x uint256-zero) (y uint256-zero)))
-        (ok (point-add p1 p2 (get-tangent-slope p1))))
-      (if (uint256-is-eq (get x p1) (get x p2))
-        (ok (tuple (x uint256-zero) (y uint256-zero)))
-        (ok (point-add p1 p2 (get-slope p1 p2))))))))
+(define-read-only (ecc-add
+  (p1 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
+  (p2 (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))))
+  (if (is-zero-point p1)
+    (ok p2)
+    (if (is-zero-point p2)
+      (ok p1)
+      (if (and (uint256-is-eq (get x p1) (get x p2)) (uint256-is-eq (get y p1) (get y p2)))
+        (if (uint256-is-zero (get y p1))
+          (ok (tuple (x uint256-zero) (y uint256-zero)))
+          (ok (point-add p1 p2 (get-tangent-slope p1))))
+        (if (uint256-is-eq (get x p1) (get x p2))
+          (ok (tuple (x uint256-zero) (y uint256-zero)))
+          (ok (point-add p1 p2 (get-slope p1 p2))))))))
 
-(define-read-only (loop-bits-256
+
+(define-read-only (double-and-add
   (i uint)
-  (acc 
-    (tuple
-      (result (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
-      (point (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
-      (scalar (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-      (count uint)
-      (double_rs (list 256 (tuple (x (buff 32)) (y (buff 32)))))
-      (add (list 256 (tuple (x (buff 32)) (y (buff 32))))))))
+  (acc (tuple
+    (result (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
+    (point (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))))
+    (scalar (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+    (count uint)
+    (double_rs (list 256 (tuple (x (buff 32)) (y (buff 32)))))
+    (add (list 256 (tuple (x (buff 32)) (y (buff 32))))))))
   (let (
     (double_r (unwrap-panic (ecc-add (get result acc) (get result acc)))))
     (if (> (uint256-check-bit (get scalar acc) i) u0)
@@ -209,10 +183,11 @@
         add: (unwrap-panic (as-max-len? (append (get  add acc) (tuple (x (uint256-to-hex (get x double_r))) (y (uint256-to-hex (get y double_r))) )) u256)),
       })))
 
+;; scalar x point
 (define-read-only (scalar-mul
   (scalar (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
   (a (tuple (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (y (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))) )
-  (fold loop-bits-256 iter-uint-256 {
+  (fold double-and-add iter-uint-256 {
     result: (tuple (x uint256-zero) (y uint256-zero)),
     point: a,
     scalar: scalar,
@@ -221,9 +196,10 @@
     add: (list)
     }))
 
+;; scalar x Base point
 (define-read-only (txG
   (scalar (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-  (fold loop-bits-256 iter-uint-256 {
+  (fold double-and-add iter-uint-256 {
     result: (tuple (x uint256-zero) (y uint256-zero)),
     point: (tuple (x Gx) (y Gy)),
     scalar: scalar,
@@ -234,22 +210,25 @@
 
 ;; 0x02, even
 ;; 0x03, odd
-(define-read-only (get-y-from-xpubkey (even bool) (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+(define-read-only (get-y-from-xpubkey
+  (even bool)
+  (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
   (let (
-      (x_3 (uint512-mod (uint256-mul (uint512-mod (uint256-mul x x) p-uint512) x) p-uint512))
-      (x_3_plus_7 (uint256-mod (uint256-add x_3 uint256-seven) p-uint256))
-      (x_3_plus_7_mod_p (uint256-mod x_3_plus_7 p-uint256))
-      (y (mod-sqrt x_3_plus_7_mod_p p-uint256)))
+    (x_3 (uint512-mod (uint256-mul (uint512-mod (uint256-mul x x) p-uint512) x) p-uint512))
+    (x_3_plus_7 (uint256-mod (uint256-add x_3 uint256-seven) p-uint256))
+    (x_3_plus_7_mod_p (uint256-mod x_3_plus_7 p-uint256))
+    (y (mod-sqrt x_3_plus_7_mod_p p-uint256)))
     (if (and even (not (> (mod (get i3 y) u2) u0)))
       y
       (uint256-sub p-uint256 y))))
 
-(define-read-only (get-y-from-x-only (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+(define-read-only (get-y-from-x-only
+  (x (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
   (let (
-      (x_3 (uint512-mod (uint256-mul (uint512-mod (uint256-mul x x) p-uint512) x) p-uint512))
-      (x_3_plus_7 (uint256-mod (uint256-add x_3 uint256-seven) p-uint256))
-      (x_3_plus_7_mod_p (uint256-mod x_3_plus_7 p-uint256))
-      (y (mod-sqrt x_3_plus_7_mod_p p-uint256)))
+    (x_3 (uint512-mod (uint256-mul (uint512-mod (uint256-mul x x) p-uint512) x) p-uint512))
+    (x_3_plus_7 (uint256-mod (uint256-add x_3 uint256-seven) p-uint256))
+    (x_3_plus_7_mod_p (uint256-mod x_3_plus_7 p-uint256))
+    (y (mod-sqrt x_3_plus_7_mod_p p-uint256)))
     (if (> (mod (get i3 y) u2) u0)
       (uint256-sub p-uint256 y)
       y)))
@@ -266,43 +245,88 @@
     y: (get-y-from-compressed-pubkey compressed-pubkey)
   })
 
+;; contract-call Wrappers
+(define-read-only (uint512-mod
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint)))
+  (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+  (let (
+    (result (unwrap-panic (contract-call? .uint512-lib uint512-mod a b))))
+    {
+      i0: (get i4 result),
+      i1: (get i5 result),
+      i2: (get i6 result),
+      i3: (get i7 result),
+    }))
 
-;; contract-call? Wrappers
-(define-read-only (uint256-is-eq (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-    (unwrap-panic (contract-call? .uint256-lib uint256-is-eq a b)))
+(define-read-only (hex-to-uint256 (hex (buff 32)))
+  (unwrap-panic (contract-call? .uint256-lib hex-to-uint256 hex)))
 
-(define-read-only (uint256> (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-    (unwrap-panic (contract-call? .uint256-lib uint256> a b)))
+(define-read-only (uint256-to-hex
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (unwrap-panic (contract-call? .uint256-lib uint256-to-hex a)))
 
-(define-read-only (uint256< (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-    (unwrap-panic (contract-call? .uint256-lib uint256< a b)))
+(define-read-only (uint256-is-eq
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (unwrap-panic (contract-call? .uint256-lib uint256-is-eq a b)))
 
-(define-read-only (uint256-is-zero (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-    (unwrap-panic (contract-call? .uint256-lib uint256-is-zero a)))
+(define-read-only (uint256>
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (unwrap-panic (contract-call? .uint256-lib uint256> a b)))
 
-(define-read-only (uint256-div (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))) 
-    (unwrap-panic (contract-call? .uint256-lib uint256-div a b)))
+(define-read-only (uint256<
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (unwrap-panic (contract-call? .uint256-lib uint256< a b)))
 
-(define-read-only (uint256-mul-short (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b uint))
-    (unwrap-panic (contract-call? .uint256-lib uint256-mul-short a b)))
+(define-read-only (uint256-is-zero
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (unwrap-panic (contract-call? .uint256-lib uint256-is-zero a)))
 
-(define-read-only (uint256-mul (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))) 
-    (unwrap-panic (contract-call? .uint256-lib uint256-mul a b)))
+(define-read-only (uint256-div
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))) 
+  (unwrap-panic (contract-call? .uint256-lib uint256-div a b)))
 
-(define-read-only (uint256-add (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))) 
-    (unwrap-panic (contract-call? .uint256-lib uint256-add a b)))
+(define-read-only (uint256-mul-short
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (b uint))
+  (unwrap-panic (contract-call? .uint256-lib uint256-mul-short a b)))
 
-(define-read-only (uint256-mod (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))) 
-    (unwrap-panic (contract-call? .uint256-lib uint256-mod a b)))
+(define-read-only (uint256-mul
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (unwrap-panic (contract-call? .uint256-lib uint256-mul a b)))
 
-(define-read-only (uint256-sub (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
-                            (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
-    (unwrap-panic (contract-call? .uint256-lib uint256-sub a b)))
+(define-read-only (uint256-add
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (unwrap-panic (contract-call? .uint256-lib uint256-add a b)))
+
+(define-read-only (uint256-mod
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (unwrap-panic (contract-call? .uint256-lib uint256-mod a b)))
+
+(define-read-only (uint256-sub
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (unwrap-panic (contract-call? .uint256-lib uint256-sub a b)))
+
+(define-read-only (uint256-sub-mod
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint)))
+  (b (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))))
+  (unwrap-panic (contract-call? .uint256-lib uint256-sub-mod a b p-uint256)))
+
+(define-read-only (uint512-to-hex
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+  (unwrap-panic (contract-call? .uint512-lib uint512-to-hex a)))
+
+(define-read-only (uint512-to-uint256-overflow
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint) (i4 uint) (i5 uint) (i6 uint) (i7 uint))))
+  (unwrap-panic (contract-call? .uint512-lib uint512-to-uint256-overflow a)))
+
+(define-read-only (uint256-check-bit
+  (a (tuple (i0 uint) (i1 uint) (i2 uint) (i3 uint))) (b uint))
+  (unwrap-panic (contract-call? .uint256-lib uint256-check-bit a b)))
