@@ -25,18 +25,18 @@ path = 'contracts/commit.clar'
 clarity_version = 2
 epoch = 2.4
 
-[contracts.long-tests]
-path = 'contracts/long-tests.clar'
+[contracts.multiple-steps_test]
+path = 'contracts/tests/multiple-steps_test.clar'
 clarity_version = 2
 epoch = 2.4
 
 [contracts.point]
-path = 'contracts/point.clar'
+path = 'contracts/math/point.clar'
 clarity_version = 2
 epoch = 2.4
 
 [contracts.point_test]
-path = 'contracts/point_test.clar'
+path = 'contracts/tests/point_test.clar'
 clarity_version = 2
 epoch = 2.4
 
@@ -46,7 +46,7 @@ clarity_version = 2
 epoch = 2.4
 
 [contracts.tapscript_test]
-path = 'contracts/tapscript_test.clar'
+path = 'contracts/tests/tapscript_test.clar'
 clarity_version = 2
 epoch = 2.4
 
